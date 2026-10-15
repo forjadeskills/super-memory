@@ -1,0 +1,9 @@
+# Local memory stores should never be committed — they are personal.
+.super-memory/
+memories/
+*.bak
+*.bak.*
+
+# OS / editor noise
+.DS_Store
+*.swp
