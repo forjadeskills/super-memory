@@ -36,11 +36,27 @@ That's it. No database to run, no service to babysit.
 
 Requires the [Claude Code](https://claude.com/claude-code) CLI.
 
+### Option A — as a plugin (recommended, one command)
+
+Inside Claude Code:
+
+```
+/plugin marketplace add fabio-reboucas/super-memory
+/plugin install super-memory@super-memory
+```
+
+That's it — the skill, the `/memory-review` command, and the auto-capture hook
+all come with it. Memories go to `~/.super-memory/memories/` by default.
+
+### Option B — manual (clone + install script)
+
 ```bash
-git clone https://github.com/<your-username>/super-memory.git
+git clone https://github.com/fabio-reboucas/super-memory.git
 cd super-memory
 bash install.sh
 ```
+
+> Use **one** method, not both — otherwise the capture hook runs twice.
 
 The installer adds the skill, a `/memory-review` command, and the auto-capture
 hook. By default your memories land in a sandbox folder

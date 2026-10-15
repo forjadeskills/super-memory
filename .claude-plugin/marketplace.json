@@ -1,0 +1,13 @@
+{
+  "name": "super-memory",
+  "owner": {
+    "name": "Fabio",
+    "url": "https://github.com/fabio-reboucas"
+  },
+  "plugins": [
+    {
+      "name": "super-memory",
+      "source": "."
+    }
+  ]
+}
