@@ -67,5 +67,12 @@ Output ONLY a single JSON object, nothing before or after it. No markdown fences
 
 If nothing meets the bar, output exactly: `{"memories": []}`
 
-Write the `title`, `hook`, `description`, and `body` in the **same language the
-user speaks in the session**. Keep slugs in kebab-case ASCII.
+## Two hard rules
+
+1. **Language.** Write EVERY human-readable field — `title`, `hook`,
+   `description`, AND `body` — in the **same language the user speaks in the
+   session**. Do not mix languages. (Only the `name` slug stays kebab-case ASCII.)
+
+2. **Never embellish.** Record only what was actually said. Do not invent details
+   the user did not state — no timezones, no numbers, no assumptions. If a detail
+   is unclear, leave it out rather than guessing.
