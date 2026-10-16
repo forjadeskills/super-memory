@@ -3,11 +3,11 @@
   "description": "Low-noise automatic long-term memory for Claude Code — captures durable facts at session end, one clean fact per file, fully local.",
   "version": "0.1.0",
   "author": {
-    "name": "Fabio",
+    "name": "Fábio Rebouças",
     "url": "https://github.com/fabio-reboucas"
   },
-  "homepage": "https://github.com/fabio-reboucas/super-memory",
-  "repository": "https://github.com/fabio-reboucas/super-memory",
+  "homepage": "https://github.com/forjadeskills/super-memory",
+  "repository": "https://github.com/forjadeskills/super-memory",
   "license": "MIT",
   "keywords": [
     "memory",

@@ -1,111 +1,115 @@
 # 🧠 Super-Memory
 
-**Low-noise, automatic long-term memory for Claude Code.**
+**Memória automática e de baixo ruído para o Claude Code.**
 
-Most memory tools for coding agents record *everything* and hope the important
-bits survive the noise. Super-Memory does the opposite: it remembers the way a
-careful human curator would — **one clean fact per file, and nothing else** —
-and it fills in **automatically** at the end of every session.
+A maioria das ferramentas de memória grava *tudo* o que acontece e torce pra
+coisa importante sobreviver no meio da bagunça. A Super-Memory faz o contrário:
+ela lembra como um bom organizador humano lembraria — **um fato limpo por
+arquivo, e nada além disso** — e se preenche **sozinha** ao fim de cada sessão.
 
-- 🤫 **Quiet by design.** If a session had nothing worth remembering, nothing is
-  written. No transcript dumps, no "every tool call."
-- 🏠 **100% local & private.** Runs on your machine. No cloud account, no API key
-  beyond the Claude CLI you already use. Secrets are scrubbed before anything
-  hits disk.
-- ✍️ **Writes like you would.** One fact, one sentence, with the *why*. Four
-  honest categories: who you are, how you like to work, project state, and
-  pointers to resources.
-- 🔁 **Updates instead of piling up.** A new fact that contradicts an old one
-  replaces it. Your memory stays small and true.
-- 🧰 **Works everywhere Claude Code does** — any project, any repo.
-- 🆓 **Free and open (MIT).** Built to help people just starting out with AI
-  coding keep a clean memory without any busywork.
+> Feita pela **[Forja de Skills](https://github.com/forjadeskills)** para quem
+> está começando no "vibe coding" ter memória de verdade, sem trabalho manual.
 
-## How it works
+## Por que ela é diferente
 
-1. A `Stop` hook fires when your Claude Code session ends.
-2. It hands the transcript + your current memory index to a small, cheap model
-   with one job: distill durable facts, following strict low-noise rules.
-3. The model returns a short list of create / update / delete operations.
-4. A tiny dependency-free Python script applies them safely — it **only** ever
-   touches files it created, and only rewrites its own block of the index.
+- 🤫 **Silenciosa.** Se a sessão não teve nada que valha a pena lembrar, ela não
+  escreve nada. Sem despejar conversa, sem guardar "cada clique".
+- 🏠 **100% local e privada.** Roda na sua máquina. Sem conta na nuvem, sem chave
+  de API além do próprio Claude Code que você já usa. Segredos são apagados
+  antes de qualquer coisa ir pro disco.
+- ✍️ **Escreve como você escreveria.** Um fato, uma frase, com o *porquê*. Quatro
+  categorias honestas: quem você é, como gosta de trabalhar, estado do projeto e
+  atalhos pra links/painéis.
+- 🔁 **Atualiza em vez de empilhar.** Um fato novo que contradiz um antigo
+  substitui o antigo. Sua memória fica pequena e verdadeira.
+- 🧰 **Funciona em qualquer projeto** onde o Claude Code funciona.
+- 🆓 **Grátis e aberta (MIT).**
 
-That's it. No database to run, no service to babysit.
+## Como funciona (em 4 passos)
 
-## Install
+1. Um gatilho dispara quando sua sessão do Claude Code termina.
+2. Ele entrega a conversa + o índice atual da sua memória para um modelo
+   pequeno e barato, com uma única missão: destilar só os fatos duráveis,
+   seguindo regras rígidas de baixo ruído.
+3. O modelo devolve uma lista curta de operações (criar / atualizar / apagar).
+4. Um script em Python, sem dependências, aplica tudo com segurança — só mexe
+   em arquivos que ele mesmo criou, e só reescreve o próprio trecho do índice.
 
-Requires the [Claude Code](https://claude.com/claude-code) CLI.
+Pronto. Sem banco de dados pra manter, sem serviço pra vigiar.
 
-### Option A — as a plugin (recommended, one command)
+## Instalação
 
-Inside Claude Code:
+Precisa do [Claude Code](https://claude.com/claude-code).
+
+### Opção A — como plugin (recomendado, um comando)
+
+Dentro do Claude Code:
 
 ```
-/plugin marketplace add fabio-reboucas/super-memory
+/plugin marketplace add forjadeskills/super-memory
 /plugin install super-memory@super-memory
 ```
 
-That's it — the skill, the `/memory-review` command, and the auto-capture hook
-all come with it. Memories go to `~/.super-memory/memories/` by default.
+Pronto — a skill, o comando `/memory-review` e o gatilho de captura automática
+já vêm juntos. As memórias ficam em `~/.super-memory/memories/`.
 
-### Option B — manual (clone + install script)
+### Opção B — manual (clonar + rodar o instalador)
 
 ```bash
-git clone https://github.com/fabio-reboucas/super-memory.git
+git clone https://github.com/forjadeskills/super-memory.git
 cd super-memory
 bash install.sh
 ```
 
-> Use **one** method, not both — otherwise the capture hook runs twice.
+> Use **um** dos dois jeitos, não os dois — senão o gatilho roda duas vezes.
 
-The installer adds the skill, a `/memory-review` command, and the auto-capture
-hook. By default your memories land in a sandbox folder
-(`~/.super-memory/memories/`) so you can see exactly what it writes before you
-trust it. Point it anywhere with:
+Por padrão suas memórias caem numa pasta de teste (`~/.super-memory/memories/`),
+pra você ver exatamente o que ela escreve antes de confiar. Mude pra onde quiser:
 
 ```bash
-export SUPER_MEMORY_DIR="$HOME/.super-memory/memories"   # change as you like
-export SUPER_MEMORY_MODEL="claude-haiku-4-5"             # the distiller model
+export SUPER_MEMORY_DIR="$HOME/.super-memory/memories"   # onde guardar
+export SUPER_MEMORY_MODEL="claude-haiku-4-5"             # modelo que destila
 ```
 
-## Using it
+## Usando no dia a dia
 
-- **Recall** happens when you (or Claude) read `MEMORY.md` at the start of work.
-- **Writing** happens automatically at session end — or on demand via the
-  `super-memory` skill.
-- **Pruning**: run `/memory-review` to list every stored fact and delete any you
-  don't want.
+- **Lembrar**: acontece quando você (ou o Claude) lê o `MEMORY.md` no começo do
+  trabalho.
+- **Gravar**: acontece sozinho ao fim da sessão — ou na hora, pela skill
+  `super-memory`.
+- **Faxina**: rode `/memory-review` pra ver todos os fatos guardados e apagar o
+  que não quiser.
 
-## What it will and won't remember
+## O que ela guarda e o que NÃO guarda
 
-**Will:** your role and stable preferences, how you want Claude to work (with the
-reason), ongoing project decisions and constraints that aren't in the code, and
-pointers to dashboards / tickets / URLs.
+**Guarda:** seu papel e preferências estáveis, como você quer que o Claude
+trabalhe (com o motivo), decisões e restrições do projeto que não estão no
+código, e atalhos pra painéis / tarefas / links.
 
-**Won't:** anything it could re-derive from your code or git history, one-off
-chatter, secrets or credentials, or a near-duplicate of something it already
-knows.
+**Não guarda:** nada que dê pra redescobrir no seu código ou histórico do Git,
+conversa-fiada, segredos ou senhas, nem cópia parecida de algo que ela já sabe —
+nesse caso ela atualiza o que já existe.
 
-## Safety
+## Segurança
 
-- Hand-written memory files are never read, moved, or deleted. The tool only
-  touches files tagged `managed_by: super-memory`.
-- In `MEMORY.md` it only rewrites the block between its own markers.
-- `settings.json` is backed up before the hook is registered.
-- Secret-looking strings (API keys, tokens, JWTs, passwords) are redacted.
+- Arquivos de memória escritos à mão **nunca** são lidos, movidos ou apagados. A
+  ferramenta só toca em arquivos marcados com `managed_by: super-memory`.
+- No `MEMORY.md`, ela só reescreve o trecho entre os marcadores dela.
+- O `settings.json` é copiado (backup) antes de registrar o gatilho.
+- Strings que parecem segredo (chaves de API, tokens, JWT, senhas) são apagadas.
 
----
+## Licença
 
-### Em português 🇧🇷
-
-Super-Memory é uma **memória automática e limpa** para o Claude Code. Ela grava
-sozinha, ao fim de cada sessão, **só os fatos que valem a pena** — uma frase por
-fato, sem lixo — e roda **100% na sua máquina**. Feita pra ajudar quem está
-começando no "vibe coding" a ter memória de verdade sem trabalho manual.
-Instale com `bash install.sh` e pronto.
+MIT — veja o arquivo [LICENSE](LICENSE). Contribuições são bem-vindas.
 
 ---
 
-## License
+### In English 🇬🇧
 
-MIT — see [LICENSE](LICENSE). Contributions welcome.
+Super-Memory is **low-noise, automatic long-term memory for Claude Code**. It
+fills in by itself at the end of each session, keeping only durable facts — one
+clean fact per file — and runs **100% locally**. Install as a plugin with
+`/plugin marketplace add forjadeskills/super-memory` then
+`/plugin install super-memory@super-memory`, or clone and run `bash install.sh`.
+Built by [Forja de Skills](https://github.com/forjadeskills) to give people new
+to AI coding real memory with zero busywork. MIT licensed.
