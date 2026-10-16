@@ -2,6 +2,10 @@
 
 **Memória automática e de baixo ruído para o Claude Code.**
 
+<p align="center">
+  <img src="assets/demo.gif" alt="Super-Memory em ação: você diz um fato uma vez e o Claude lembra na próxima sessão" width="760">
+</p>
+
 A maioria das ferramentas de memória grava *tudo* o que acontece e torce pra
 coisa importante sobreviver no meio da bagunça. A Super-Memory faz o contrário:
 ela lembra como um bom organizador humano lembraria — **um fato limpo por

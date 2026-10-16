@@ -4,6 +4,9 @@ memories/
 *.bak
 *.bak.*
 
+# QA frames from assets/make_demo.py
+assets/_*.png
+
 # OS / editor noise
 .DS_Store
 *.swp
