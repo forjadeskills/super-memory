@@ -1,7 +1,7 @@
 {
   "name": "super-memory",
   "description": "Low-noise automatic long-term memory for Claude Code — captures durable facts at session end, one clean fact per file, fully local.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "Fábio Rebouças",
     "url": "https://github.com/fabio-reboucas"

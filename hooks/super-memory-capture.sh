@@ -66,7 +66,11 @@ Now output the JSON object."
 
 # --- 5. Distill, then apply ------------------------------------------------
 # The guard env var stops this inner Claude call from firing the hook again.
-OPS="$(SUPER_MEMORY_RUNNING=1 "$CLAUDE_BIN" -p "$PROMPT" \
+# The prompt goes through STDIN, not as an argv argument: a real transcript tail
+# easily exceeds the OS per-argument limit (~128KB), which would make
+# `claude -p "$PROMPT"` die with "Argument list too long" and silently capture
+# nothing. Piping sidesteps that entirely.
+OPS="$(printf '%s' "$PROMPT" | SUPER_MEMORY_RUNNING=1 "$CLAUDE_BIN" -p \
         --model "$MODEL" \
         2>/dev/null || true)"
 

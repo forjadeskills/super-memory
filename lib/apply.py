@@ -64,9 +64,12 @@ def esc(text):
 
 
 def is_managed(path):
+    # Read the whole (small) file, not a fixed prefix: verbose frontmatter
+    # (long hook/description lines) can push `managed_by` past a short window,
+    # which would make the index rebuild skip real managed files.
     try:
         with open(path, "r", encoding="utf-8") as fh:
-            head = fh.read(400)
+            head = fh.read()
         return f"managed_by: {MANAGED_TAG}" in head
     except OSError:
         return False

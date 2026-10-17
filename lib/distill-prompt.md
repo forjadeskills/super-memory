@@ -27,6 +27,10 @@ There are exactly four types:
 
 - Anything derivable from the codebase, git history, or existing docs.
 - One-off conversational details that won't matter later.
+- Meta-memories about yourself, this memory tool, or the mere fact that you ran,
+  tested, reviewed, or evaluated something. Save the concrete *outcome* (a
+  decision made, a bug found, a config value) — never a verdict like "quality is
+  good" or a note that "I checked X."
 - Anything already covered by an existing memory — UPDATE that one instead
   (see below). Do not create near-duplicates.
 - Secrets, tokens, passwords, API keys, or personal data beyond what is strictly
@@ -71,8 +75,14 @@ If nothing meets the bar, output exactly: `{"memories": []}`
 
 1. **Language.** Write EVERY human-readable field — `title`, `hook`,
    `description`, AND `body` — in the **same language the user speaks in the
-   session**. Do not mix languages. (Only the `name` slug stays kebab-case ASCII.)
+   session**. If the session mixes languages, pick the user's primary one and use
+   it for ALL fields of ALL memories — never mix two languages inside a memory.
+   (Only the `name` slug stays kebab-case ASCII.)
 
 2. **Never embellish.** Record only what was actually said. Do not invent details
    the user did not state — no timezones, no numbers, no assumptions. If a detail
    is unclear, leave it out rather than guessing.
+
+3. **Copy identifiers exactly.** Usernames, names, file paths, codes, URLs, and
+   IDs must be reproduced EXACTLY as they appear in the session — never guess,
+   autocomplete, or "correct" them.

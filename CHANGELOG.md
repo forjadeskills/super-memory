@@ -3,6 +3,24 @@
 Todas as mudanças importantes deste projeto ficam registradas aqui.
 O formato segue o [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/).
 
+## [0.1.1] — 2026-10-17
+
+### Corrigido
+- **A captura não funcionava em sessões reais.** O gatilho passava o texto do
+  prompt como argumento de linha de comando; numa transcrição real isso estoura
+  o limite do sistema (~128 KB) e falhava **em silêncio**, sem guardar nada.
+  Agora o prompt vai pela entrada padrão (stdin).
+- **O índice `MEMORY.md` saía vazio.** A checagem de arquivo gerenciado lia só os
+  primeiros 400 caracteres; cabeçalhos longos escondiam o marcador `managed_by`,
+  e o índice não listava os fatos. Agora lê o arquivo inteiro.
+
+### Melhorado
+- Regras de destilação mais rígidas: nada de "meta-memórias" (veredictos sobre
+  testes/avaliações), **um único idioma por memória**, e identificadores (nomes,
+  caminhos, códigos) copiados exatamente como aparecem.
+
+[0.1.1]: https://github.com/forjadeskills/super-memory/releases/tag/v0.1.1
+
 ## [0.1.0] — 2026-10-16
 
 Primeiro lançamento público. 🎉

@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/github/license/forjadeskills/super-memory?color=a6e3a1" alt="MIT License"></a>
-  <img src="https://img.shields.io/badge/version-0.1.0-89b4fa" alt="version 0.1.0">
+  <img src="https://img.shields.io/badge/version-0.1.1-89b4fa" alt="version 0.1.1">
   <img src="https://img.shields.io/badge/Claude%20Code-plugin-cba6f7?logo=anthropic" alt="Claude Code plugin">
   <img src="https://img.shields.io/badge/mem%C3%B3ria-100%25%20local-f9e2af" alt="100% local">
   <a href="https://github.com/forjadeskills/super-memory/stargazers"><img src="https://img.shields.io/github/stars/forjadeskills/super-memory?style=social" alt="GitHub stars"></a>
